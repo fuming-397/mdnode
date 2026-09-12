@@ -141,30 +141,26 @@
   color: var(--c-ink-2);
 }
 
-.post-body-layout {
+/* 元数据条：位于正文之前（桌面与手机顺序一致，不再占用侧栏） */
+.post-meta {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--sp-7);
+  gap: var(--sp-4);
 }
 
-/* 侧栏元数据（宽屏） */
-.post-aside {
-  display: grid;
-  gap: var(--sp-6);
-  align-content: start;
+.post-meta .meta-table {
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: var(--sp-3) var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: var(--line-w) solid var(--c-line);
 }
 
-@media (min-width: 1000px) {
-  .post-body-layout {
-    grid-template-columns: minmax(0, 1fr) 18rem;
-  }
-  .post-aside {
-    border-left: var(--line-w) solid var(--c-line);
-    padding-left: var(--sp-6);
+/* 宽屏时双列排列（标签 / 值成对出现），不挤压正文宽度 */
+@media (min-width: 900px) {
+  .post-meta .meta-table {
+    grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr);
+    gap: var(--sp-3) var(--sp-6);
   }
 }
-
-.aside-block { display: grid; gap: var(--sp-3); }
 
 /* ============================ 搜索页 ============================ */
 .search-panel {

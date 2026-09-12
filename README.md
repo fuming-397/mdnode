@@ -66,7 +66,8 @@ md_node/
 │   │   │   └── sanitize.js       # HTML 白名单净化（XSS 防护）
 │   │   ├── ui/
 │   │   │   ├── common.js         # 页面启动流程与通用渲染块
-│   │   │   └── layout.js         # 页头 / 页脚 / 头像组件
+│   │   │   ├── layout.js         # 页头 / 页脚 / 头像组件
+│   │   │   └── code-copy.js      # 代码块「点击复制」按钮
 │   │   └── pages/
 │   │       ├── home.js
 │   │       ├── posts.js
@@ -218,6 +219,10 @@ python3 tools/build-manifest.py --no-bundle  # 只生成清单，不生成内容
 任务列表、GFM 表格（含对齐）、水平线、硬换行、反斜杠转义、原始 HTML（会被净化）。
 
 > 原始 HTML 会经过白名单净化：`<script>`、`on*` 事件属性、`javascript:` 协议等危险内容会被移除。
+
+代码块右上角附带一个半透明的 **COPY** 按钮：点击即可复制该代码块的全部内容，
+鼠标悬停 / 键盘聚焦时会完全显现，复制成功后短暂显示 `COPIED`（样式见 `assets/css/markdown.css`，
+逻辑见 `assets/js/ui/code-copy.js`）。
 
 ---
 

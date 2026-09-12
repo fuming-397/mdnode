@@ -88,6 +88,7 @@
   --gutter:    clamp(1rem, 4.5vw, 4.5rem); /* 页面左右留白 */
   --maxw:      1280px;                      /* 内容最大宽度 */
   --maxw-text: 70ch;                        /* 正文最佳可读宽度 */
+  --maxw-article: var(--maxw);              /* 详情页正文宽度：默认铺满内容区，可改成如 96ch 收窄 */
   --header-h:  clamp(3.5rem, 6vw, 4.5rem);
   --line-w:    1px;                         /* 极细分割线宽度 */
 

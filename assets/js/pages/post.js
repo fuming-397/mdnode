@@ -7,6 +7,7 @@ import { loadPosts, getPostById, getAdjacentPosts } from '../core/store.js';
 import { renderMarkdown } from '../core/markdown.js';
 import { postUrl, postsUrl, getRoute } from '../core/router.js';
 import { bootPage, renderLoading, renderFatal, metaTable } from '../ui/common.js';
+import { enhanceCodeBlocks } from '../ui/code-copy.js';
 
 async function main() {
   const { config, mount } = await bootPage({ title: '文章' });
@@ -45,39 +46,30 @@ function renderById(id, mount, config) {
 
   const article = el('article', { class: 'article' });
 
-  // 文章头部
+  // 文章头部（标题 / 日期 / 摘要）
   article.append(el('header', { class: 'post-header' }, [
     el('p', { class: 'micro micro--muted', text: `ENTRY / ${post.updated ? formatDateTime(post.updated) : 'NO DATE'}` }),
     el('h1', { class: 'post-header__title', text: post.title }),
-    post.summary ? el('p', { class: 'post-header__summary', text: post.summary }) : null,
-    el('div', { class: 'article__meta micro' }, [
-      el('span', { text: post.author || config.author.name }),
-      el('span', { text: `ID ${post.id}` }),
-      ...(post.tags.length ? [el('span', { text: post.tags.join(' / ') })] : [])
+    post.summary ? el('p', { class: 'post-header__summary', text: post.summary }) : null
+  ]));
+
+  // 元数据：放在正文**之前**（桌面与手机顺序一致，不再使用侧栏）
+  article.append(el('section', { class: 'post-meta', 'aria-label': '文章元数据' }, [
+    el('p', { class: 'micro micro--muted', text: 'METADATA / 文章信息' }),
+    metaTable([
+      ['ID', post.id],
+      ['作者', post.author || config.author.name],
+      ['最后修改', post.updated ? formatDateTime(post.updated) : '—'],
+      ['时间戳', String(post.timestamp || '—')],
+      ['标签', post.tags.length ? post.tags.join(', ') : '—']
     ])
   ]));
 
-  // 正文 + 侧栏
+  // 正文：铺满内容宽度；代码块自动附加「复制」按钮
   const body = el('div', { class: 'md' });
   body.innerHTML = renderMarkdown(post.body);
-
-  const aside = el('aside', { class: 'post-aside' }, [
-    el('section', { class: 'aside-block' }, [
-      el('p', { class: 'micro micro--muted', text: 'METADATA' }),
-      metaTable([
-        ['ID', post.id],
-        ['作者', post.author || config.author.name],
-        ['最后修改', post.updated ? formatDateTime(post.updated) : '—'],
-        ['时间戳', String(post.timestamp || '—')],
-        ['标签', post.tags.length ? post.tags.join(', ') : '—']
-      ])
-    ])
-  ]);
-
-  article.append(el('div', { class: 'post-body-layout' }, [
-    body,
-    aside
-  ]));
+  enhanceCodeBlocks(body);
+  article.append(body);
 
   // 上/下一篇
   const { prev, next } = getAdjacentPosts(post.id);

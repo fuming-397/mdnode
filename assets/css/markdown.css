@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .article {
-  max-width: var(--maxw-text);
+  max-width: var(--maxw-article);
 }
 
 .article > * + * { margin-top: var(--sp-5); }
@@ -21,13 +21,6 @@
   font-size: var(--fs-h1);
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
-}
-
-.article__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2) var(--sp-5);
-  color: var(--c-ink-3);
 }
 
 /* 正文内容 */
@@ -129,17 +122,76 @@
   white-space: pre;
 }
 
-/* 语言标注：右上角极小大写英文 */
+/* 语言标注：右上角极小大写英文（右侧留出「复制」按钮的位置） */
 .md pre[data-lang]::before {
   content: attr(data-lang);
   display: block;
   margin-bottom: var(--sp-3);
+  padding-right: 5.5rem;
   font-family: var(--font-mono);
   font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: var(--tracking-micro);
   text-transform: uppercase;
   color: var(--c-ink-3);
+}
+
+/* ---- 代码块容器的「复制」按钮（逻辑见 assets/js/ui/code-copy.js） ---- */
+
+/* 为右上角的按钮提供定位基准（按钮不在 <pre> 内，不会跟着代码横向滚动） */
+.md .code-block { position: relative; }
+
+/* 顶部留出一条工具行：语言标注在左，复制按钮在右 */
+.md .code-block pre { padding-top: var(--sp-6); }
+
+.md .code-copy {
+  position: absolute;
+  top: var(--sp-1);
+  right: var(--sp-1);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.5rem;               /* 保证触控 / 鼠标可点面积 */
+  opacity: 0.45;                    /* 默认半透明，不抢正文 */
+  padding: var(--sp-1) var(--sp-3);
+  border: var(--line-w) solid var(--c-line-2);
+  background: var(--c-bg-deep);
+  color: var(--c-ink-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--t-color), var(--t-fade);
+}
+
+/* 鼠标移入 / 键盘聚焦：提高不透明度，完全显现 */
+.md .code-copy:hover,
+.md .code-copy:focus-visible {
+  opacity: 1;
+  border-color: var(--c-line);
+  color: var(--c-ink);
+}
+
+/* 复制成功 / 失败的短暂反馈 */
+.md .code-copy[data-state="done"] {
+  opacity: 1;
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+  border-color: var(--c-line);
+}
+.md .code-copy[data-state="fail"] {
+  opacity: 1;
+  background: var(--c-danger);
+  color: var(--c-bg);
+  border-color: var(--c-line);
+}
+
+@media print {
+  .md .code-copy { display: none; }
 }
 
 /* 表格：外层容器负责横向滚动，避免直接给 <table> 设置 display:block 破坏列对齐 */
