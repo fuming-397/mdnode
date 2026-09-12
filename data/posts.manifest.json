@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-09-12T17:53:19Z",
+  "generator": "tools/build-manifest.py",
+  "count": 4,
+  "hash": "f995bc3408c2",
+  "files": [
+    "changelog.md",
+    "design-notes.md",
+    "getting-started.md",
+    "markdown-syntax.md"
+  ]
+}

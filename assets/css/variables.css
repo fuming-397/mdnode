@@ -1,0 +1,163 @@
+/* ============================================================================
+   variables.css — 全局设计令牌（Design Tokens）
+   ----------------------------------------------------------------------------
+   需求约束：CSS 中所有颜色配置与过渡动画必须统一通过 var() 引用本文件变量。
+   修改本文件即可整体换肤、调整排版节奏与动效时长。
+   风格：瑞士国际主义排版 + 新粗野主义（直角 / 无阴影 / 无渐变 / 高对比）。
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------
+     颜色 · 亮色主题（纸张质感米白底 + 纯黑墨色 + 荧光绿强调）
+     ------------------------------------------------------------------ */
+  --c-bg:            #f2efe6;  /* 页面底色：浅米色纸张 */
+  --c-bg-deep:       #e8e4d8;  /* 次级底色：更深的纸色 */
+  --c-surface:       #f7f5ee;  /* 卡片 / 面板底色 */
+  --c-ink:           #0b0b0b;  /* 主文字：近纯黑 */
+  --c-ink-2:         #2a2a2a;  /* 次级文字 */
+  --c-ink-3:         #5f5f5c;  /* 弱化文字 */
+  --c-ink-4:         #8d8d88;  /* 极弱文字 / 占位 */
+  --c-line:          #0b0b0b;  /* 极细分割线（主） */
+  --c-line-2:        rgba(11, 11, 11, 0.24);
+  --c-line-3:        rgba(11, 11, 11, 0.10);
+  --c-accent:        #c8ff00;  /* 强调色：高饱和荧光绿 */
+  --c-accent-2:      #b2e600;  /* 强调色 hover */
+  --c-accent-ink:    #0b0b0b;  /* 强调色上的文字 */
+  --c-invert-bg:     #0b0b0b;  /* 反相块底色 */
+  --c-invert-ink:    #f2efe6;  /* 反相块文字 */
+  --c-code-bg:       #e9e5da;  /* 行内 / 代码块底色 */
+  --c-code-ink:      #1c1c1c;
+  --c-mark-bg:       var(--c-accent);
+  --c-mark-ink:      var(--c-accent-ink);
+  --c-danger:        #cf1f1f;
+  --c-warn-bg:       #fff3c4;
+  --c-warn-ink:      #4a3b00;
+  --c-focus:         #0b6bff;  /* 键盘焦点描边 */
+
+  /* 打印专用（始终为纯黑白，不随主题变化） */
+  --c-print-bg:      #ffffff;
+  --c-print-ink:     #000000;
+
+  /* 纸张纹理：内联 SVG 噪点（本地内联，无外部请求 / 无 CSS 渐变） */
+  --tex-paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+
+  /* 主题元信息（供 meta[name=theme-color] 同步） */
+  --c-theme-color: var(--c-bg);
+
+  /* ------------------------------------------------------------------
+     字体族（全部系统字体，零网络请求）
+     ------------------------------------------------------------------ */
+  --font-sans: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Noto Sans CJK SC", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+               "Liberation Mono", "Courier New", monospace;
+
+  /* ------------------------------------------------------------------
+     字号 / 行高 / 字距（极致字号对比是本项目核心视觉特征）
+     ------------------------------------------------------------------ */
+  --fs-display:  clamp(3rem,    11vw,   9rem);    /* 首屏超大标题 */
+  --fs-h1:       clamp(2.1rem,  6vw,    5rem);    /* 页面主标题 */
+  --fs-h2:       clamp(1.5rem,  3.4vw,  2.7rem);  /* 区块标题 */
+  --fs-h3:       clamp(1.15rem, 2.1vw,  1.6rem);  /* 卡片 / 文章标题 */
+  --fs-h4:       clamp(1rem,    1.5vw,  1.25rem);
+  --fs-body:     clamp(0.9375rem, 0.88rem + 0.28vw, 1.0625rem); /* 正文极小 */
+  --fs-sm:       0.8125rem;
+  --fs-micro:    0.6875rem;                        /* 顶部辅助信息：大写英文 */
+
+  --lh-tight:    0.92;
+  --lh-head:     1.06;
+  --lh-body:     1.75;
+
+  --tracking-tight: -0.03em;
+  --tracking-micro:  0.2em;   /* 大写英文标签大字距 */
+  --tracking-wide:   0.08em;
+
+  /* ------------------------------------------------------------------
+     间距 / 尺寸
+     ------------------------------------------------------------------ */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+  --sp-9: 7rem;
+
+  --gutter:    clamp(1rem, 4.5vw, 4.5rem); /* 页面左右留白 */
+  --maxw:      1280px;                      /* 内容最大宽度 */
+  --maxw-text: 70ch;                        /* 正文最佳可读宽度 */
+  --header-h:  clamp(3.5rem, 6vw, 4.5rem);
+  --line-w:    1px;                         /* 极细分割线宽度 */
+
+  /* ------------------------------------------------------------------
+     动效：时长与缓动函数统一在此定义（需求：动画必须用 var() 控制）
+     ------------------------------------------------------------------ */
+  --dur-1: 110ms;
+  --dur-2: 240ms;
+  --dur-3: 420ms;
+  --dur-4: 720ms;
+  --ease:      cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:   cubic-bezier(0.5, 0, 0.9, 0.4);
+
+  /* 常用过渡简写（组件直接引用，保证动画统一可调） */
+  --t-color:  color var(--dur-2) var(--ease),
+              background-color var(--dur-2) var(--ease),
+              border-color var(--dur-2) var(--ease);
+  --t-fade:   opacity var(--dur-3) var(--ease);
+  --t-move:   transform var(--dur-3) var(--ease-out);
+  --t-slide:  transform var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease);
+  --stagger:  55ms;  /* 列表逐个入场延迟步长 */
+
+  /* 层级 */
+  --z-header: 100;
+  --z-toast:  200;
+}
+
+/* ============================================================================
+   暗色主题：仅覆盖颜色令牌，其余（间距 / 动效 / 字体）保持不变
+   ========================================================================== */
+[data-theme="dark"] {
+  --c-bg:         #0e0e0d;
+  --c-bg-deep:    #161615;
+  --c-surface:    #151514;
+  --c-ink:        #f2efe6;
+  --c-ink-2:      #d8d5cb;
+  --c-ink-3:      #9b988f;
+  --c-ink-4:      #6d6a63;
+  --c-line:       #f2efe6;
+  --c-line-2:     rgba(242, 239, 230, 0.26);
+  --c-line-3:     rgba(242, 239, 230, 0.12);
+  --c-accent:     #c8ff00;
+  --c-accent-2:   #d6ff3d;
+  --c-accent-ink: #0b0b0b;
+  --c-invert-bg:  #f2efe6;
+  --c-invert-ink: #0b0b0b;
+  --c-code-bg:    #1d1d1b;
+  --c-code-ink:   #e6e3da;
+  --c-mark-bg:    var(--c-accent);
+  --c-mark-ink:   var(--c-accent-ink);
+  --c-danger:     #ff6b6b;
+  --c-warn-bg:    #3a3208;
+  --c-warn-ink:   #ffe98a;
+  --c-focus:      #7fb2ff;
+
+  /* 暗色下纸张噪点更弱 */
+  --tex-paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+
+  --c-theme-color: var(--c-bg);
+  --c-danger-fg: #ff9a9a;
+}
+
+/* 尊重系统「减少动态效果」偏好：统一关闭长动画 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 0ms;
+    --dur-2: 0ms;
+    --dur-3: 0ms;
+    --dur-4: 0ms;
+    --stagger: 0ms;
+  }
+}

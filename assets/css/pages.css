@@ -1,0 +1,213 @@
+/* ============================================================================
+   pages.css — 各页面专属样式（首页 Hero、列表、详情、搜索、404）
+   ========================================================================== */
+
+/* ============================ 首页 ============================ */
+.hero {
+  display: grid;
+  gap: var(--sp-6);
+  padding-block: var(--sp-6) var(--sp-8);
+  border-bottom: var(--line-w) solid var(--c-line);
+}
+
+.hero__top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-6);
+  align-items: flex-start;
+}
+
+.hero__id {
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+}
+
+.hero__name {
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.hero__role {
+  color: var(--c-ink-3);
+}
+
+.hero__lede {
+  max-width: 52ch;
+  font-size: var(--fs-h4);
+  line-height: 1.5;
+  color: var(--c-ink-2);
+}
+
+.hero__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  border-top: var(--line-w) solid var(--c-line);
+  border-left: var(--line-w) solid var(--c-line);
+}
+
+.stat {
+  padding: var(--sp-4) var(--sp-5);
+  border-right: var(--line-w) solid var(--c-line);
+  border-bottom: var(--line-w) solid var(--c-line);
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.stat__value {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  font-family: var(--font-mono);
+}
+
+/* 首页区块标题行 */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: var(--sp-4);
+  margin-bottom: var(--sp-5);
+  border-bottom: var(--line-w) solid var(--c-line);
+}
+
+.section-head__title { font-size: var(--fs-h2); }
+
+/* 社交链接行 */
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+}
+
+/* ============================ 列表页 ============================ */
+.list-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-5);
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--sp-4);
+  border-bottom: var(--line-w) solid var(--c-line);
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.filter-btn {
+  padding: var(--sp-2) var(--sp-3);
+  border: var(--line-w) solid var(--c-line-2);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  transition: var(--t-color);
+}
+.filter-btn:hover { border-color: var(--c-line); }
+.filter-btn[aria-pressed="true"] {
+  background: var(--c-ink);
+  color: var(--c-bg);
+  border-color: var(--c-ink);
+}
+
+/* ============================ 详情页 ============================ */
+.post-header {
+  display: grid;
+  gap: var(--sp-5);
+  padding-bottom: var(--sp-6);
+  border-bottom: var(--line-w) solid var(--c-line);
+  margin-bottom: var(--sp-7);
+}
+
+.post-header__title {
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  max-width: 22ch;
+}
+
+.post-header__summary {
+  max-width: var(--maxw-text);
+  color: var(--c-ink-2);
+}
+
+.post-body-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-7);
+}
+
+/* 侧栏元数据（宽屏） */
+.post-aside {
+  display: grid;
+  gap: var(--sp-6);
+  align-content: start;
+}
+
+@media (min-width: 1000px) {
+  .post-body-layout {
+    grid-template-columns: minmax(0, 1fr) 18rem;
+  }
+  .post-aside {
+    border-left: var(--line-w) solid var(--c-line);
+    padding-left: var(--sp-6);
+  }
+}
+
+.aside-block { display: grid; gap: var(--sp-3); }
+
+/* ============================ 搜索页 ============================ */
+.search-panel {
+  display: grid;
+  gap: var(--sp-5);
+  padding-block: var(--sp-5) var(--sp-6);
+  border-bottom: var(--line-w) solid var(--c-line);
+}
+
+.search-hint {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  color: var(--c-ink-3);
+}
+
+.search-results { border-top: var(--line-w) solid var(--c-line); }
+
+/* 关键词命中统计条 */
+.search-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-5);
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: var(--sp-5);
+  border-bottom: var(--line-w) solid var(--c-line);
+}
+
+/* ============================ 404 页 ============================ */
+.error-code {
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.05em;
+  font-family: var(--font-mono);
+}
+
+/* ============================ 响应式微调 ============================ */
+@media (max-width: 720px) {
+  .hero { padding-block: var(--sp-5) var(--sp-7); }
+  .hero__top { flex-direction: column; }
+  .hero__name { font-size: clamp(2.5rem, 15vw, 4rem); }
+  .post-row { grid-template-columns: minmax(0, 1fr); gap: var(--sp-2); }
+  .post-row__index { font-size: var(--fs-micro); }
+}

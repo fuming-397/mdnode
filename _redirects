@@ -1,0 +1,20 @@
+# Netlify / Cloudflare Pages 配置（可选）——本项目**不需要**任何重写规则
+#
+# 站内链接都是真实存在的文件（/posts.html、/post.html?id=x），平台默认就能正确提供，
+# 因此没有任何配置也能完整工作。下面几条只是为「旧的无后缀链接」保留的别名，
+# 让 /posts 直接命中 posts.html，省掉一次由 assets/js/core/route-recover.js 完成的跳转。
+# 不需要可以整份删除。
+#
+# 子目录部署（例如 /blog）时，请给每行路径加上该前缀，例如：
+#   /blog/posts   /blog/posts.html   200
+
+# 旧的无后缀链接（含结尾斜杠写法）
+/posts            /posts.html    200
+/posts/           /posts.html    200
+/post             /post.html     200
+/post/            /post.html     200
+/search           /search.html   200
+/search/          /search.html   200
+
+# 其余未匹配路径：返回 404 状态码，内容为项目自带的 404 页面
+/*                /404.html      404

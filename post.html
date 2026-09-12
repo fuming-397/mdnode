@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-page="post">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>文章 · 码字 MDNode</title>
+  <meta name="description" content="文章详情">
+  <meta name="theme-color" content="#f2efe6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0b'/%3E%3Crect x='6' y='6' width='20' height='20' fill='%23c8ff00'/%3E%3C/svg%3E">
+
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/markdown.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+
+  <!-- 兼容旧的无后缀链接（可选）：正常 .html 地址完全不受影响 -->
+  <script src="assets/js/core/route-recover.js"></script>
+  <script src="assets/js/core/theme-init.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主内容</a>
+  <div id="site-header"></div>
+
+  <!-- 全项目唯一的帖子详情页：由 JS 读取 URL 中的 id 参数（post.html?id=<id>）后渲染 -->
+  <main id="main" class="page container">
+    <noscript>
+      <div class="notice">文章详情需要启用 JavaScript 才能读取并渲染 Markdown。</div>
+    </noscript>
+  </main>
+
+  <div id="site-footer"></div>
+  <script type="module" src="assets/js/pages/post.js"></script>
+</body>
+</html>

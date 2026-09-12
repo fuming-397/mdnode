@@ -1,0 +1,51 @@
+{
+  "site": {
+    "title": "码字",
+    "shortName": "MDNODE",
+    "tabTitle": "码字 · MDNode",
+    "description": "极简个人静态博客系统：Markdown 驱动，零依赖，纯原生 HTML / CSS / JavaScript。",
+    "keywords": "Markdown, 静态博客, MDNode, 码字, 个人博客",
+    "copyright": "码字 (MDNode)",
+    "license": "CC BY-NC-SA 4.0",
+    "basePath": "",
+    "nav": [
+      { "key": "home", "label": "INDEX" },
+      { "key": "posts", "label": "POSTS" },
+      { "key": "search", "label": "SEARCH" }
+    ]
+  },
+  "author": {
+    "name": "YOUR NAME",
+    "role": "AUTHOR / WRITER",
+    "bio": "在这里写一段自我介绍。所有内容都可以在 data/site.json 中直接修改，无需改动任何代码。",
+    "avatar": "assets/img/avatar-sample.svg",
+    "location": "Earth",
+    "email": "you@example.com",
+    "social": [
+      { "label": "GITHUB", "url": "https://github.com/" },
+      { "label": "MASTODON", "url": "https://mastodon.social/" }
+    ]
+  },
+  "home": {
+    "headline": "WRITING IN MARKDOWN.",
+    "intro": "把想法写成文件，让时间替你归档。这里只保存纯文本，不保存多余的东西。",
+    "latestCount": 4
+  },
+  "posts": {
+    "dir": "posts",
+    "manifest": "data/posts.manifest.json"
+  },
+  "search": {
+    "minChars": 1,
+    "maxResults": 50,
+    "snippetLength": 180
+  },
+  "theme": {
+    "default": "light"
+  },
+  "ui": {
+    "showTopbar": true,
+    "showStats": true,
+    "dateLocale": "zh-CN"
+  }
+}
